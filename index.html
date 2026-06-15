@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIEMA — Federação das Indústrias do Maranhão</title>
+  <link rel="icon" type="image/svg+xml" href="fiema-logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -48,6 +49,31 @@
     .section-sub { font-size: 1rem; color: var(--text-muted); margin-bottom: 40px; }
 
     /* ── ENTITY BAR ── */
+    /* Mockup disclaimer */
+    .mockup-bar {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: #1a1a2e;
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 16px;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    .mockup-bar i { color: #f0c040; }
+    .mockup-bar a {
+      color: #74b9ff;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .mockup-bar a:hover { text-decoration: underline; }
+
     .entity-bar {
       background: #0d2d5e;
       padding: 0;
@@ -602,6 +628,13 @@
 </head>
 <body>
 
+<!-- MOCKUP DISCLAIMER -->
+<div class="mockup-bar" role="note" aria-label="Aviso de protótipo">
+  <i class="fa-solid fa-flask-vial"></i>
+  <span>Este é um <strong>protótipo</strong> desenvolvido pela <strong>acdev</strong> — não se trata do site oficial da FIEMA.</span>
+  <a href="https://www.fiema.org.br/fiema" target="_blank" rel="noopener">Acessar site oficial <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a>
+</div>
+
 <!-- HEADER -->
 <header class="header" id="header">
   <!-- Entity bar -->
@@ -1118,7 +1151,7 @@
   <!-- Footer bottom -->
   <div class="footer-bottom">
     <div class="container">
-      <span class="footer-copy">© 2025 FIEMA — Todos os direitos reservados.</span>
+      <span class="footer-copy">© 2026 FIEMA — Todos os direitos reservados.</span>
       <div class="footer-bottom-links">
         <a href="https://www.fiema.org.br/pagina/view/33">Acessibilidade</a>
         <a href="https://www.fiema.org.br/site/mapa-site">Mapa do Site</a>
