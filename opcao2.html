@@ -1564,7 +1564,10 @@
       .mockup-bar { font-size: 11px; gap: 8px; padding: 0 12px; }
       .mockup-bar span { font-size: 0; }
       .mockup-bar span strong { font-size: 11px; }
-      .entity-strip { display: none; }
+      .entity-strip { display: block; padding: 6px 0; }
+      .entity-strip .container { justify-content: center; }
+      .entity-strip .container > div:last-child { display: none !important; }
+      .entity-strip-links { justify-content: center; width: 100%; gap: 16px; }
       .header { top: var(--disclaimer-h); }
       .hero { padding-top: calc(70px + var(--disclaimer-h)); min-height: auto; }
       
