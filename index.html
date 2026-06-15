@@ -50,10 +50,14 @@
 
     /* ── ENTITY BAR ── */
     /* Mockup disclaimer */
+    :root { --disclaimer-h: 38px; }
     .mockup-bar {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 9999;
+      left: 0;
+      right: 0;
+      height: var(--disclaimer-h);
+      z-index: 1100;
       background: #1a1a2e;
       color: rgba(255,255,255,.88);
       font-size: 13px;
@@ -61,18 +65,20 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 8px 16px;
+      padding: 0 16px;
       text-align: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
-    .mockup-bar i { color: #f0c040; }
+    .mockup-bar i { color: #f0c040; flex-shrink: 0; }
     .mockup-bar a {
       color: #74b9ff;
       text-decoration: none;
       font-weight: 500;
       white-space: nowrap;
+      flex-shrink: 0;
     }
     .mockup-bar a:hover { text-decoration: underline; }
+    .mockup-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     .entity-bar {
       background: #0d2d5e;
@@ -139,7 +145,7 @@
     .entity-bar-right a:hover { color: rgba(255,255,255,.8); }
 
     /* ── NAV ── */
-    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--ease); }
+    .header { position: fixed; top: var(--disclaimer-h); left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--ease); }
     .header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.1); }
 
     .nav .container { display: flex; align-items: center; height: 64px; gap: 24px; }
@@ -158,13 +164,13 @@
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--white); z-index: 999; padding: 100px 20px 40px; flex-direction: column; gap: 4px; overflow-y: auto; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--white); z-index: 999; padding: calc(100px + var(--disclaimer-h)) 20px 40px; flex-direction: column; gap: 4px; overflow-y: auto; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-size: 1.05rem; font-weight: 500; padding: 14px 16px; border-radius: var(--radius); border-bottom: 1px solid var(--gray-100); transition: all var(--ease); }
     .mobile-menu a:hover { background: var(--gray-50); color: var(--blue); }
 
     /* ── HERO ── */
-    .hero { min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(140deg, #0d2d5e 0%, var(--blue) 45%, #1e55c4 100%); position: relative; overflow: hidden; padding-top: 100px; }
+    .hero { min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(140deg, #0d2d5e 0%, var(--blue) 45%, #1e55c4 100%); position: relative; overflow: hidden; padding-top: calc(100px + var(--disclaimer-h)); }
     .hero::before { content: ''; position: absolute; inset: 0; background: url('https://www.fiema.org.br/images/home.png') center/cover no-repeat; opacity: .08; }
     .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 0); background-size: 32px 32px; }
     .hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 80px; background: var(--white); clip-path: ellipse(55% 100% at 50% 100%); }
