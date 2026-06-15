@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIEMA — Federação das Indústrias do Maranhão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --blue: #164194;
+      --blue-dark: #0f2d6b;
+      --blue-light: #1e55c4;
+      --sesi: #52AE32;
+      --senai: #EF4910;
+      --iel: #6CC2BA;
+      --white: #fff;
+      --gray-50: #f8f9fa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-600: #6c757d;
+      --gray-800: #222;
+      --text: #1a1a2e;
+      --text-muted: #555;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,.12);
+      --radius: 8px;
+      --radius-lg: 16px;
+      --ease: 200ms ease;
+      --max: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Roboto', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .tag { display: inline-block; font-size: .75rem; font-weight: 500; color: var(--blue); background: rgba(22,65,148,.08); padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .section-sub { font-size: 1rem; color: var(--text-muted); margin-bottom: 40px; }
+
+    /* ── ENTITY BAR ── */
+    .entity-bar {
+      background: #0d2d5e;
+      padding: 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .entity-bar .container {
+      display: flex;
+      align-items: stretch;
+      height: 36px;
+      gap: 0;
+    }
+    .entity-bar-label {
+      display: flex;
+      align-items: center;
+      color: rgba(255,255,255,.45);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      padding-right: 14px;
+      border-right: 1px solid rgba(255,255,255,.1);
+      white-space: nowrap;
+    }
+    .entity-pills {
+      display: flex;
+      align-items: stretch;
+    }
+    .entity-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.65);
+      padding: 0 14px;
+      border-right: 1px solid rgba(255,255,255,.07);
+      transition: all var(--ease);
+      letter-spacing: .3px;
+    }
+    .entity-pill:hover { background: rgba(255,255,255,.07); color: var(--white); }
+    .entity-pill:hover .ep-dot { transform: scale(1.3); }
+    .ep-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: transform var(--ease);
+    }
+    .ep-dot.sesi  { background: var(--sesi); }
+    .ep-dot.senai { background: var(--senai); }
+    .ep-dot.iel   { background: var(--iel); }
+    .ep-dot.ciema { background: #6ea3ff; }
+    .entity-bar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .entity-bar-right a {
+      font-size: .7rem;
+      color: rgba(255,255,255,.4);
+      transition: color var(--ease);
+    }
+    .entity-bar-right a:hover { color: rgba(255,255,255,.8); }
+
+    /* ── NAV ── */
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--ease); }
+    .header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.1); }
+
+    .nav .container { display: flex; align-items: center; height: 64px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+    .nav-links { display: none; align-items: center; gap: 4px; flex: 1; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: var(--text-muted); padding: 8px 12px; border-radius: var(--radius); transition: all var(--ease); }
+    .nav-links a:hover { color: var(--blue); background: rgba(22,65,148,.06); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .btn-icon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius); color: var(--text-muted); transition: all var(--ease); }
+    .btn-icon:hover { background: var(--gray-100); color: var(--blue); }
+
+    .hamburger { display: flex; flex-direction: column; gap: 5px; padding: 8px; border-radius: var(--radius); transition: background var(--ease); }
+    .hamburger:hover { background: var(--gray-100); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s ease; }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--white); z-index: 999; padding: 100px 20px 40px; flex-direction: column; gap: 4px; overflow-y: auto; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.05rem; font-weight: 500; padding: 14px 16px; border-radius: var(--radius); border-bottom: 1px solid var(--gray-100); transition: all var(--ease); }
+    .mobile-menu a:hover { background: var(--gray-50); color: var(--blue); }
+
+    /* ── HERO ── */
+    .hero { min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(140deg, #0d2d5e 0%, var(--blue) 45%, #1e55c4 100%); position: relative; overflow: hidden; padding-top: 100px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://www.fiema.org.br/images/home.png') center/cover no-repeat; opacity: .08; }
+    .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 0); background-size: 32px 32px; }
+    .hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 80px; background: var(--white); clip-path: ellipse(55% 100% at 50% 100%); }
+    .hero .container { position: relative; z-index: 1; padding-top: 60px; padding-bottom: 100px; }
+    .hero-eyebrow { display: inline-block; font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 span { color: rgba(255,255,255,.65); }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.8); line-height: 1.75; margin-bottom: 40px; max-width: 500px; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-hero-fill { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--blue); padding: 14px 28px; border-radius: var(--radius); font-size: 1rem; font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,.25); transition: all var(--ease); }
+    .btn-hero-fill:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-hero-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--white); padding: 14px 28px; border-radius: var(--radius); font-size: 1rem; font-weight: 700; border: 2px solid rgba(255,255,255,.45); transition: all var(--ease); }
+    .btn-hero-outline:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.75); transform: translateY(-2px); }
+
+    /* ── DESTAQUES ── */
+    .destaques { padding: 56px 0; background: var(--white); }
+    .destaques-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .destaque-main {
+      background: var(--blue);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      transition: all var(--ease);
+    }
+    .destaque-main::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .destaque-main::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: 60px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,.04);
+      border-radius: 50%;
+    }
+    .destaque-main:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .destaque-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--white);
+      padding: 4px 12px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      width: fit-content;
+      position: relative;
+      z-index: 1;
+    }
+    .destaque-main-icon {
+      font-size: 2.2rem;
+      color: rgba(255,255,255,.35);
+      position: relative;
+      z-index: 1;
+    }
+    .destaque-main-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      position: relative;
+      z-index: 1;
+    }
+    .destaque-main-desc {
+      font-size: .9rem;
+      color: rgba(255,255,255,.75);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .destaque-main-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--white);
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      width: fit-content;
+      transition: all var(--ease);
+      position: relative;
+      z-index: 1;
+      margin-top: 4px;
+    }
+    .destaque-main:hover .destaque-main-cta { background: #e8eeff; }
+
+    .destaques-side { display: flex; flex-direction: column; gap: 16px; }
+    .destaque-card {
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all var(--ease);
+      flex: 1;
+    }
+    .destaque-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); transform: translateY(-2px); background: var(--white); }
+    .destaque-card-icon {
+      font-size: 1.4rem;
+      color: var(--blue);
+      opacity: .7;
+    }
+    .destaque-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .destaque-card-desc {
+      font-size: .83rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .destaque-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 4px;
+    }
+
+    /* ── STATS ── */
+    .stats { padding: 28px 0; border-bottom: 1px solid var(--gray-200); }
+    .stats .container { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .stat { text-align: center; padding: 16px; position: relative; }
+    .stat + .stat::before { content: ''; position: absolute; left: 0; top: 20%; height: 60%; width: 1px; background: var(--gray-200); }
+    .stat-num { font-size: 2rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: .82rem; color: var(--text-muted); }
+
+    /* ── SERVICES ── */
+    .services { padding: 80px 0; background: var(--gray-50); }
+    .services-controls { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+    .tab-group { display: inline-flex; background: var(--gray-200); border-radius: 100px; padding: 4px; gap: 4px; }
+    .tab-btn { padding: 10px 22px; border-radius: 100px; font-size: .875rem; font-weight: 500; color: var(--text-muted); transition: all var(--ease); white-space: nowrap; }
+    .tab-btn.active { background: var(--blue); color: var(--white); box-shadow: var(--shadow-sm); }
+    .tab-btn:hover:not(.active) { background: var(--gray-300); color: var(--text); }
+    .search-wrap { position: relative; max-width: 360px; }
+    .search-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray-600); font-size: .85rem; pointer-events: none; }
+    .search-input { width: 100%; padding: 11px 16px 11px 40px; border: 1.5px solid var(--gray-300); border-radius: 100px; font-size: .9rem; font-family: inherit; background: var(--white); color: var(--text); transition: all var(--ease); outline: none; }
+    .search-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(22,65,148,.12); }
+
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .service-card { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--white); border-radius: var(--radius); border: 1.5px solid var(--gray-200); transition: all var(--ease); color: var(--text); position: relative; overflow: hidden; }
+    .service-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--blue); transform: scaleY(0); transition: transform var(--ease); border-radius: 3px 0 0 3px; }
+    .service-card:hover { border-color: rgba(22,65,148,.25); box-shadow: var(--shadow-md); transform: translateX(4px); }
+    .service-card:hover::after { transform: scaleY(1); }
+    .service-card[hidden] { display: none !important; }
+    .svc-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; min-width: 44px; background: rgba(22,65,148,.07); border-radius: var(--radius); color: var(--blue); font-size: .95rem; transition: all var(--ease); }
+    .service-card:hover .svc-icon { background: var(--blue); color: var(--white); }
+    .svc-info { flex: 1; min-width: 0; }
+    .svc-name { font-size: .925rem; font-weight: 600; line-height: 1.3; margin-bottom: 2px; }
+    .svc-cat { font-size: .75rem; color: var(--text-muted); }
+    .svc-ext { color: var(--gray-300); font-size: .7rem; transition: all var(--ease); flex-shrink: 0; opacity: 0; }
+    .service-card:hover .svc-ext { color: var(--blue); opacity: 1; }
+    .svc-empty { display: none; text-align: center; padding: 48px 20px; color: var(--text-muted); grid-column: 1/-1; }
+    .svc-empty.show { display: block; }
+
+    /* ── ENTITIES ── */
+    .entities { padding: 80px 0; }
+    .entities-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .entity-card { display: flex; align-items: center; gap: 0; border-radius: var(--radius-lg); border: 1.5px solid var(--gray-200); overflow: hidden; transition: all var(--ease); }
+    .entity-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .entity-card.sesi:hover  { border-color: var(--sesi); }
+    .entity-card.senai:hover { border-color: var(--senai); }
+    .entity-card.iel:hover   { border-color: var(--iel); }
+    .entity-card.ciema:hover { border-color: var(--blue); }
+    .entity-logo-wrap {
+      display: flex; align-items: center; justify-content: center;
+      width: 100px; min-width: 100px; align-self: stretch;
+      padding: 20px 16px;
+    }
+    .entity-card.sesi  .entity-logo-wrap { background: var(--sesi); }
+    .entity-card.senai .entity-logo-wrap { background: var(--senai); }
+    .entity-card.iel   .entity-logo-wrap { background: var(--iel); }
+    .entity-card.ciema .entity-logo-wrap { background: var(--blue); }
+    .entity-logo { width: 64px; height: auto; max-height: 40px; object-fit: contain; filter: brightness(0) invert(1); }
+    .entity-logo-text { font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: .5px; }
+    .entity-info { flex: 1; padding: 20px 22px; }
+    .entity-name { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .entity-desc { font-size: .85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
+    .entity-link { display: inline-flex; align-items: center; gap: 5px; font-size: .8rem; font-weight: 600; padding: 5px 12px; border-radius: 100px; border: 1.5px solid currentColor; transition: all var(--ease); }
+    .entity-card.sesi  .entity-link { color: var(--sesi); }
+    .entity-card.senai .entity-link { color: var(--senai); }
+    .entity-card.iel   .entity-link { color: var(--iel); }
+    .entity-card.ciema .entity-link { color: var(--blue); }
+    .entity-card:hover .entity-link { color: var(--white); }
+    .entity-card.sesi:hover  .entity-link { background: var(--sesi); border-color: var(--sesi); }
+    .entity-card.senai:hover .entity-link { background: var(--senai); border-color: var(--senai); }
+    .entity-card.iel:hover   .entity-link { background: var(--iel); border-color: var(--iel); }
+    .entity-card.ciema:hover .entity-link { background: var(--blue); border-color: var(--blue); }
+
+    /* ── NEWS ── */
+    .news { padding: 80px 0; background: var(--gray-50); }
+    .news-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; gap: 16px; }
+    .news-all { font-size: .875rem; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: gap var(--ease); }
+    .news-all:hover { gap: 10px; }
+    .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .news-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gray-200); transition: all var(--ease); display: flex; flex-direction: column; }
+    .news-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .news-img { width: 100%; height: 196px; object-fit: cover; background: var(--gray-200); }
+    .news-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .news-date { font-size: .78rem; color: var(--text-muted); margin-bottom: 8px; }
+    .news-title { font-size: .925rem; font-weight: 600; line-height: 1.5; flex: 1; margin-bottom: 14px; color: var(--text); }
+    .news-more { font-size: .8rem; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: 5px; }
+
+    /* ── UNITS ── */
+    .units { padding: 64px 0; background: var(--blue); }
+    .units .tag { color: rgba(255,255,255,.75); background: rgba(255,255,255,.12); }
+    .units .section-title { color: var(--white); margin-top: 8px; }
+    .units .section-sub { color: rgba(255,255,255,.65); }
+    .units-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .unit-card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius-lg); padding: 24px 28px; color: var(--white); transition: all var(--ease); display: flex; align-items: center; gap: 16px; }
+    .unit-card:hover { background: rgba(255,255,255,.15); transform: translateY(-2px); }
+    .unit-icon { font-size: 1.5rem; opacity: .7; flex-shrink: 0; }
+    .unit-city { font-size: 1.1rem; font-weight: 700; }
+    .unit-sub { font-size: .82rem; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter { padding: 64px 0; border-top: 1px solid var(--gray-200); }
+    .newsletter .container { max-width: 560px; text-align: center; }
+    .nl-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+    .nl-input { flex: 1; min-width: 200px; padding: 13px 18px; border: 1.5px solid var(--gray-300); border-radius: var(--radius); font-size: .95rem; font-family: inherit; outline: none; transition: border-color var(--ease); }
+    .nl-input:focus { border-color: var(--blue); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: var(--white); padding: 13px 22px; border-radius: var(--radius); font-size: .9rem; font-weight: 600; font-family: inherit; transition: all var(--ease); cursor: pointer; border: none; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #111827;
+      color: rgba(255,255,255,.6);
+      padding: 0 0 0;
+    }
+
+    /* Entity strip */
+    .footer-entities {
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 28px 0;
+    }
+    .footer-entities .container {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .footer-entity-label {
+      font-size: .7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.3);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding-right: 24px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      margin-right: 24px;
+      white-space: nowrap;
+    }
+    .footer-entity-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .footer-entity-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.5);
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 100px;
+      transition: all var(--ease);
+    }
+    .footer-entity-pill:hover { color: var(--white); border-color: rgba(255,255,255,.3); }
+    .footer-entity-pill .ep-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* Main footer body */
+    .footer-body { padding: 56px 0 40px; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .footer-brand-name svg { flex-shrink: 0; }
+    .footer-wordmark {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.5px;
+      display: none;
+    }
+    .footer-brand-desc {
+      font-size: .875rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 280px;
+    }
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      color: rgba(255,255,255,.5);
+    }
+    .footer-contact-item i { color: rgba(255,255,255,.25); width: 14px; }
+    .footer-social { display: flex; gap: 8px; }
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      color: rgba(255,255,255,.5);
+      transition: all var(--ease);
+      font-size: .9rem;
+    }
+    .footer-social a:hover { background: var(--blue); color: var(--white); border-color: transparent; }
+
+    .footer-col-title {
+      font-size: .72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.35);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: .875rem;
+      color: rgba(255,255,255,.5);
+      transition: all var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-links a::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      flex-shrink: 0;
+      transition: all var(--ease);
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-links a:hover::before { background: var(--blue-light); transform: scale(1.5); }
+
+    /* Footer bottom */
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 20px 0;
+    }
+    .footer-bottom .container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-copy { font-size: .8rem; color: rgba(255,255,255,.3); }
+    .footer-bottom-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .footer-bottom-links a { font-size: .78rem; color: rgba(255,255,255,.3); transition: color var(--ease); }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.75); }
+
+    /* ── FAB WHATSAPP ── */
+    .fab-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      padding: 13px 20px;
+      border-radius: 100px;
+      font-size: .875rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: all var(--ease);
+    }
+    .fab-wa:hover {
+      background: #1ebe5d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,211,102,.5);
+    }
+    .fab-wa svg { flex-shrink: 0; }
+    .fab-label { display: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 480px) { .fab-label { display: inline; } }
+
+    @media (min-width: 640px) {
+      .stats .container { grid-template-columns: repeat(4, 1fr); }
+      .news-grid { grid-template-columns: repeat(2, 1fr); }
+      .units-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+      .destaques-grid { grid-template-columns: 1fr 1fr; }
+      .services-controls { flex-direction: row; align-items: center; justify-content: space-between; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .entities-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+      .footer-bottom .container { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    @media (min-width: 900px) {
+      .destaques-grid { grid-template-columns: 2fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .entities-grid { grid-template-columns: repeat(2, 1fr); }
+      .news-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <!-- Entity bar -->
+  <div class="entity-bar">
+    <div class="container">
+      <span class="entity-bar-label">Acesse também</span>
+      <div class="entity-pills">
+        <a href="#" class="entity-pill"><span class="ep-dot sesi"></span>SESI</a>
+        <a href="#" class="entity-pill"><span class="ep-dot senai"></span>SENAI</a>
+        <a href="#" class="entity-pill"><span class="ep-dot iel"></span>IEL</a>
+        <a href="#" class="entity-pill"><span class="ep-dot ciema"></span>CIEMA</a>
+      </div>
+      <div class="entity-bar-right">
+        <a href="https://www.fiema.org.br/pagina/view/33">Acessibilidade</a>
+        <a href="https://www.fiema.org.br/site/mapa-site">Mapa do Site</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main nav -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo" aria-label="FIEMA">
+        <svg height="42" viewBox="0 0 250 106" xmlns="http://www.w3.org/2000/svg" style="width:auto;display:block;" aria-hidden="true">
+          <g transform="translate(0,106) scale(0.1,-0.1)" fill="#0D4093" stroke="none">
+            <path d="M510 794 c-8 -1 -32 -5 -52 -9 -43 -7 -95 -47 -110 -84 -11 -28 -78 -383 -78 -413 0 -17 7 -19 73 -16 l72 3 17 95 c9 52 17 96 17 98 1 1 39 2 86 2 95 0 101 4 107 76 l3 39 -88 3 -89 3 7 27 c10 42 31 52 117 52 43 0 78 3 78 8 1 4 5 26 9 49 6 29 5 46 -3 52 -11 8 -138 20 -166 15z"/>
+            <path d="M1074 789 c-106 -14 -131 -52 -169 -261 -32 -173 -27 -202 33 -240 33 -20 49 -23 140 -22 56 0 107 5 112 10 5 5 12 33 16 62 l7 52 -86 0 c-47 0 -88 3 -90 8 -3 4 -2 22 0 40 l5 32 89 0 c48 0 90 4 93 8 3 5 8 32 12 60 l7 52 -87 0 c-83 0 -86 1 -86 23 0 44 14 52 107 57 l88 5 9 48 c6 29 6 51 0 56 -13 12 -138 18 -200 10z"/>
+            <path d="M1352 781 c-15 -9 -27 -64 -67 -306 -14 -82 -28 -162 -31 -177 l-6 -28 71 0 c80 0 71 -12 96 135 10 55 21 104 25 108 4 5 16 -12 26 -37 18 -44 21 -46 61 -46 38 0 44 4 78 50 21 28 39 49 41 48 1 -2 -8 -57 -21 -123 -13 -66 -20 -124 -16 -128 5 -4 37 -7 72 -5 l63 3 8 35 c25 117 79 454 74 466 -6 16 -97 20 -124 5 -9 -5 -46 -50 -82 -100 -36 -49 -67 -90 -70 -90 -3 -1 -21 38 -40 85 -19 48 -40 93 -48 100 -15 15 -89 19 -110 5z"/>
+            <path d="M2015 780 c-11 -4 -30 -18 -41 -31 -20 -22 -194 -444 -194 -469 0 -6 30 -10 74 -10 l75 0 19 53 20 52 56 3 c53 3 56 2 56 -21 0 -14 3 -39 6 -56 l7 -31 68 0 c37 0 70 3 72 8 9 13 -13 437 -24 463 -6 15 -22 31 -35 38 -29 13 -129 14 -159 1z m65 -200 l0 -80 -30 0 c-16 0 -30 4 -30 9 0 13 51 151 56 151 2 0 4 -36 4 -80z"/>
+            <path d="M788 634 l-76 -36 -26 -138 c-14 -76 -26 -149 -26 -164 0 -26 1 -26 69 -26 58 0 71 3 75 18 9 29 67 374 63 378 -2 2 -37 -13 -79 -32z"/>
+          </g>
+          <g transform="translate(0,106) scale(0.1,-0.1)" fill="#008AD1" stroke="none">
+            <path d="M753 782 c-11 -7 -37 -122 -28 -130 2 -3 38 10 79 28 63 28 76 38 81 61 4 16 4 33 0 39 -7 11 -114 14 -132 2z"/>
+          </g>
+        </svg>
+      </a>
+
+      <div class="nav-links">
+        <a href="#">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#noticias">Notícias</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#">Contato</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#" class="btn-icon" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menu">
+  <a href="#">Sobre a FIEMA</a>
+  <a href="#servicos">Serviços</a>
+  <a href="#noticias">Notícias</a>
+  <a href="#unidades">Unidades</a>
+  <a href="#">Publicações</a>
+  <a href="#">Contato</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="container">
+    <div style="max-width:660px">
+      <span class="hero-eyebrow">Federação das Indústrias do Maranhão</span>
+      <h1>Fortalecendo a<br><span>indústria do</span><br>Maranhão</h1>
+      <p class="hero-desc">Acesse serviços, cursos, publicações e muito mais. Encontre o que você precisa — para seu crescimento pessoal ou para o sucesso do seu negócio.</p>
+      <div class="hero-ctas">
+        <a href="#servicos" class="btn-hero-fill" id="heroVoce">
+          <i class="fa-solid fa-user"></i> Para Você
+        </a>
+        <a href="#servicos" class="btn-hero-outline" id="heroEmpresa">
+          <i class="fa-solid fa-building"></i> Para Sua Empresa
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUES -->
+<section class="destaques">
+  <div class="container">
+    <span class="tag">Em Destaque</span>
+    <h2 class="section-title">Serviços prioritários</h2>
+    <p class="section-sub" style="margin-bottom:28px">Os recursos mais utilizados pela indústria maranhense, direto ao ponto.</p>
+
+    <div class="destaques-grid">
+      <!-- Card principal: Guia Industrial (o mais importante) -->
+      <a href="https://www.fiema.org.br/servico/75/guia-industrial-e-empresarial-fiema"
+         class="destaque-main" target="_blank">
+        <span class="destaque-badge"><i class="fa-solid fa-star fa-xs"></i> Principal</span>
+        <div class="destaque-main-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div class="destaque-main-title">Guia Industrial e Empresarial do Maranhão</div>
+        <div class="destaque-main-desc">
+          Encontre empresas, fornecedores e parceiros industriais em todo o estado.
+          O maior diretório da indústria maranhense, atualizado e de acesso gratuito.
+        </div>
+        <span class="destaque-main-cta">
+          Acessar o Guia <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i>
+        </span>
+      </a>
+
+      <!-- Cards secundários -->
+      <div class="destaques-side">
+        <a href="https://www.fiema.org.br/servico/95/declaracao-de-funcionamento"
+           class="destaque-card" target="_blank">
+          <div class="destaque-card-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+          <div class="destaque-card-title">Reduza o IRPJ com benefícios da SUDENE</div>
+          <div class="destaque-card-desc">
+            Obtenha a Declaração de Funcionamento FIEMA e acesse incentivos fiscais para expandir sua empresa no Maranhão.
+          </div>
+          <span class="destaque-card-link">
+            Saiba mais <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i>
+          </span>
+        </a>
+
+        <a href="https://www.fiema.org.br/servico/96/2-centro-judiciario-de-solucao-de-conflitos-empresarias-de-sao-luis"
+           class="destaque-card" target="_blank">
+          <div class="destaque-card-icon"><i class="fa-solid fa-gavel"></i></div>
+          <div class="destaque-card-title">Resolução de Conflitos Empresariais</div>
+          <div class="destaque-card-desc">
+            Mediação e conciliação ágil para disputas empresariais, sem precisar ir à Justiça.
+          </div>
+          <span class="destaque-card-link">
+            Saiba mais <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Sindicatos filiados</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Unidades no estado</div></div>
+    <div class="stat"><div class="stat-num">60+</div><div class="stat-label">Anos de história</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Entidades no sistema</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="container">
+    <span class="tag">Serviços</span>
+    <h2 class="section-title">O que você precisa?</h2>
+    <p class="section-sub">Todos os serviços disponíveis, sem complicação.</p>
+
+    <div class="services-controls">
+      <div class="tab-group" role="tablist">
+        <button class="tab-btn active" data-tab="voce" role="tab" aria-selected="true">
+          <i class="fa-solid fa-user"></i> Para Você
+        </button>
+        <button class="tab-btn" data-tab="empresa" role="tab" aria-selected="false">
+          <i class="fa-solid fa-building"></i> Para Sua Empresa
+        </button>
+        <button class="tab-btn" data-tab="todos" role="tab" aria-selected="false">Todos</button>
+      </div>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" class="search-input" id="svcSearch" placeholder="Buscar serviço…" aria-label="Buscar serviço">
+      </div>
+    </div>
+
+    <div class="services-grid" id="svcGrid">
+      <!-- Para Você -->
+      <a href="https://www.fiema.org.br/cursos/agenda-de-cursos" class="service-card" data-group="voce" data-name="cursos capacitação educação" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="svc-info"><div class="svc-name">Cursos e Capacitação</div><div class="svc-cat">Educação</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/editais/11/Processos+Seletivos+-+Alunos" class="service-card" data-group="voce" data-name="processos seletivos alunos" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <div class="svc-info"><div class="svc-name">Processos Seletivos</div><div class="svc-cat">Alunos</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://sge.fiema.org.br/FrameHTML/web/app/edu/PortalEducacional/login/" class="service-card" data-group="voce" data-name="portal aluno sge sistema" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <div class="svc-info"><div class="svc-name">Portal do Aluno</div><div class="svc-cat">Acesso SGE</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/eventos/agenda-de-eventos" class="service-card" data-group="voce" data-name="eventos agenda calendário" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-calendar-days"></i></div>
+        <div class="svc-info"><div class="svc-name">Agenda de Eventos</div><div class="svc-cat">Eventos</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/editais/7" class="service-card" data-group="voce" data-name="hub inovação saúde" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="svc-info"><div class="svc-name">Hub de Inovação em Saúde</div><div class="svc-cat">Saúde e Inovação</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/83/beneficios-ao-associado" class="service-card" data-group="voce" data-name="benefícios associado sindicato" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-gift"></i></div>
+        <div class="svc-info"><div class="svc-name">Benefícios ao Associado</div><div class="svc-cat">Sindicatos</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/sac/index/duvidas-frequentes" class="service-card" data-group="voce" data-name="dúvidas frequentes faq atendimento" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <div class="svc-info"><div class="svc-name">Dúvidas Frequentes</div><div class="svc-cat">Atendimento</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+
+      <!-- Para Sua Empresa -->
+      <a href="https://www.fiema.org.br/servico/74/acesso-ao-credito" class="service-card" data-group="empresa" data-name="acesso crédito financiamento" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <div class="svc-info"><div class="svc-name">Acesso ao Crédito</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/93/certificado-digital" class="service-card" data-group="empresa" data-name="certificado digital" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-certificate"></i></div>
+        <div class="svc-info"><div class="svc-name">Certificado Digital</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/72/centro-internacional-de-negocios" class="service-card" data-group="empresa" data-name="centro internacional negócios comércio exterior" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-earth-americas"></i></div>
+        <div class="svc-info"><div class="svc-name">Centro Internacional de Negócios</div><div class="svc-cat">Comércio Exterior</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/95/declaracao-de-funcionamento" class="service-card" data-group="empresa" data-name="declaração funcionamento documento" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+        <div class="svc-info"><div class="svc-name">Declaração de Funcionamento</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.pdfmaranhao.com.br/" class="service-card" data-group="empresa" data-name="programa desenvolvimento fornecedores" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-industry"></i></div>
+        <div class="svc-info"><div class="svc-name">Prog. Desenvolvimento de Fornecedores</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://expoindustriama.com.br" class="service-card" data-group="empresa" data-name="expo indústria maranhão feira" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-store"></i></div>
+        <div class="svc-info"><div class="svc-name">Expo Indústria Maranhão</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/75/guia-industrial-e-empresarial-fiema" class="service-card" data-group="empresa" data-name="guia industrial empresarial diretório" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div class="svc-info"><div class="svc-name">Guia Industrial e Empresarial</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/78/programas-de-apoio-a-competitividade" class="service-card" data-group="empresa" data-name="programas apoio competitividade" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="svc-info"><div class="svc-name">Programas de Apoio à Competitividade</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/81/sindicato-legal" class="service-card" data-group="empresa" data-name="sindicato legal jurídico" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <div class="svc-info"><div class="svc-name">Sindicato Legal</div><div class="svc-cat">Sindicatos</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/63/relacoes-sindicais" class="service-card" data-group="empresa" data-name="relações sindicais associativismo" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-people-group"></i></div>
+        <div class="svc-info"><div class="svc-name">Relações Sindicais</div><div class="svc-cat">Associativismo</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/compliance" class="service-card" data-group="empresa" data-name="compliance governança programa" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="svc-info"><div class="svc-name">Compliance</div><div class="svc-cat">Governança</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/96/2-centro-judiciario-de-solucao-de-conflitos-empresarias-de-sao-luis" class="service-card" data-group="empresa" data-name="centro judiciário solução conflitos empresariais" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-gavel"></i></div>
+        <div class="svc-info"><div class="svc-name">Centro Judiciário de Conflitos</div><div class="svc-cat">Competitividade</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+      <a href="https://www.fiema.org.br/servico/84/formulario-de-filiacao" class="service-card" data-group="empresa" data-name="formulário filiação sindicato cadastro" target="_blank">
+        <div class="svc-icon"><i class="fa-solid fa-file-pen"></i></div>
+        <div class="svc-info"><div class="svc-name">Formulário de Filiação</div><div class="svc-cat">Sindicatos</div></div>
+        <i class="fa-solid fa-arrow-up-right-from-square svc-ext"></i>
+      </a>
+
+      <div class="svc-empty" id="svcEmpty">
+        Nenhum serviço encontrado para "<span id="emptyTerm"></span>"
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTITIES -->
+<section class="entities" id="entidades">
+  <div class="container">
+    <span class="tag">Sistema FIEMA</span>
+    <h2 class="section-title">Nossas entidades</h2>
+    <p class="section-sub">Cada entidade com foco específico para atender melhor a indústria maranhense.</p>
+    <div class="entities-grid">
+      <a href="#" class="entity-card sesi">
+        <div class="entity-logo-wrap">
+          <img src="https://www.fiema.org.br/images/sesi.png" alt="SESI" class="entity-logo"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'entity-logo-text\'>SESI</span>'">
+        </div>
+        <div class="entity-info">
+          <div class="entity-name">SESI</div>
+          <div class="entity-desc">Serviço Social da Indústria — saúde, educação e qualidade de vida para trabalhadores da indústria.</div>
+          <span class="entity-link">Acessar site <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></span>
+        </div>
+      </a>
+      <a href="#" class="entity-card senai">
+        <div class="entity-logo-wrap">
+          <img src="https://www.fiema.org.br/images/senai.png" alt="SENAI" class="entity-logo"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'entity-logo-text\'>SENAI</span>'">
+        </div>
+        <div class="entity-info">
+          <div class="entity-name">SENAI</div>
+          <div class="entity-desc">Serviço Nacional de Aprendizagem Industrial — educação profissional e inovação tecnológica.</div>
+          <span class="entity-link">Acessar site <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></span>
+        </div>
+      </a>
+      <a href="#" class="entity-card iel">
+        <div class="entity-logo-wrap">
+          <img src="https://www.fiema.org.br/images/iel.png" alt="IEL" class="entity-logo"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'entity-logo-text\'>IEL</span>'">
+        </div>
+        <div class="entity-info">
+          <div class="entity-name">IEL</div>
+          <div class="entity-desc">Instituto Euvaldo Lodi — integração entre academia e indústria por meio de estágios e pesquisas.</div>
+          <span class="entity-link">Acessar site <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></span>
+        </div>
+      </a>
+      <a href="#" class="entity-card ciema">
+        <div class="entity-logo-wrap">
+          <img src="https://www.fiema.org.br/images/ciema.png" alt="CIEMA" class="entity-logo"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'entity-logo-text\'>CIEMA</span>'">
+        </div>
+        <div class="entity-info">
+          <div class="entity-name">CIEMA</div>
+          <div class="entity-desc">Centro das Indústrias do Estado do Maranhão — representação e defesa do setor industrial.</div>
+          <span class="entity-link">Acessar site <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="noticias">
+  <div class="container">
+    <div class="news-header">
+      <div>
+        <span class="tag">Notícias</span>
+        <h2 class="section-title">Últimas notícias</h2>
+      </div>
+      <a href="https://www.fiema.org.br/noticias/lista-de-noticias" class="news-all" target="_blank">
+        Ver todas <i class="fa-solid fa-arrow-right fa-xs"></i>
+      </a>
+    </div>
+    <div class="news-grid">
+      <a href="https://www.fiema.org.br/noticia/6086" class="news-card" target="_blank">
+        <img src="https://www.fiema.org.br/uploads/noticia/24150/maior_02Lci4N70-puqHAGD40lsakkD9J99lIt.jpeg"
+             alt="" class="news-img" loading="lazy" onerror="this.style.background='#e9ecef'">
+        <div class="news-body">
+          <div class="news-date"><i class="fa-regular fa-calendar fa-xs"></i> Jun 2025</div>
+          <div class="news-title">Sindibebidas-MA participa de congresso de tecnologia e inovação cervejeira em São Paulo</div>
+          <span class="news-more">Ler mais <i class="fa-solid fa-chevron-right fa-xs"></i></span>
+        </div>
+      </a>
+      <a href="https://www.fiema.org.br/noticia/6087" class="news-card" target="_blank">
+        <img src="https://www.fiema.org.br/uploads/noticia/24151/maior_B6j3_NWK2GCW1Z33OEBXv7yMt6Bljb9R.jpeg"
+             alt="" class="news-img" loading="lazy" onerror="this.style.background='#e9ecef'">
+        <div class="news-body">
+          <div class="news-date"><i class="fa-regular fa-calendar fa-xs"></i> Jun 2025</div>
+          <div class="news-title">FIEMA e CIEMA realizam visita institucional ao ex-presidente José Sarney</div>
+          <span class="news-more">Ler mais <i class="fa-solid fa-chevron-right fa-xs"></i></span>
+        </div>
+      </a>
+      <a href="https://www.fiema.org.br/noticia/6083" class="news-card" target="_blank">
+        <img src="https://www.fiema.org.br/uploads/noticia/24139/maior_SYDVZM9JEdRgbHKhF-T_-WwxUDu000mp.jpg"
+             alt="" class="news-img" loading="lazy" onerror="this.style.background='#e9ecef'">
+        <div class="news-body">
+          <div class="news-date"><i class="fa-regular fa-calendar fa-xs"></i> Jun 2025</div>
+          <div class="news-title">SINDIPAN promove palestra sobre gestão financeira para empresários da panificação</div>
+          <span class="news-more">Ler mais <i class="fa-solid fa-chevron-right fa-xs"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- UNITS -->
+<section class="units" id="unidades">
+  <div class="container">
+    <span class="tag">Presença no Estado</span>
+    <h2 class="section-title">Nossas unidades</h2>
+    <p class="section-sub">Estamos presentes em três cidades do Maranhão.</p>
+    <div class="units-grid">
+      <a href="https://www.fiema.org.br/unidade/16/sao-luis-2" class="unit-card" target="_blank">
+        <div class="unit-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div><div class="unit-city">São Luís</div><div class="unit-sub">Sede principal</div></div>
+      </a>
+      <a href="https://www.fiema.org.br/unidade/17/imperatriz-2" class="unit-card" target="_blank">
+        <div class="unit-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div><div class="unit-city">Imperatriz</div><div class="unit-sub">Unidade regional</div></div>
+      </a>
+      <a href="https://www.fiema.org.br/unidade/35/balsas-2" class="unit-card" target="_blank">
+        <div class="unit-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div><div class="unit-city">Balsas</div><div class="unit-sub">Unidade regional</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="container">
+    <span class="tag">Newsletter</span>
+    <h2 class="section-title">Fique por dentro</h2>
+    <p class="section-sub">Receba novidades, publicações e eventos do Sistema FIEMA no seu e-mail.</p>
+    <form class="nl-form" id="nlForm">
+      <input type="email" class="nl-input" placeholder="Seu melhor e-mail" required aria-label="E-mail para newsletter">
+      <button type="submit" class="btn-primary">
+        Inscrever-se <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <!-- Entity strip -->
+  <div class="footer-entities">
+    <div class="container">
+      <span class="footer-entity-label">Sistema FIEMA</span>
+      <div class="footer-entity-pills">
+        <a href="#" class="footer-entity-pill"><span class="ep-dot sesi"></span>SESI</a>
+        <a href="#" class="footer-entity-pill"><span class="ep-dot senai"></span>SENAI</a>
+        <a href="#" class="footer-entity-pill"><span class="ep-dot iel"></span>IEL</a>
+        <a href="#" class="footer-entity-pill"><span class="ep-dot ciema" style="background:#6ea3ff"></span>CIEMA</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer body -->
+  <div class="footer-body">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand col -->
+        <div>
+          <div class="footer-brand-name">
+            <svg height="38" viewBox="0 0 250 106" xmlns="http://www.w3.org/2000/svg" style="width:auto;display:block;margin-bottom:14px;" aria-label="FIEMA" role="img">
+              <title>FIEMA</title>
+              <g transform="translate(0,106) scale(0.1,-0.1)" fill="#0D4093" stroke="none">
+                <path d="M510 794 c-8 -1 -32 -5 -52 -9 -43 -7 -95 -47 -110 -84 -11 -28 -78 -383 -78 -413 0 -17 7 -19 73 -16 l72 3 17 95 c9 52 17 96 17 98 1 1 39 2 86 2 95 0 101 4 107 76 l3 39 -88 3 -89 3 7 27 c10 42 31 52 117 52 43 0 78 3 78 8 1 4 5 26 9 49 6 29 5 46 -3 52 -11 8 -138 20 -166 15z"/>
+                <path d="M1074 789 c-106 -14 -131 -52 -169 -261 -32 -173 -27 -202 33 -240 33 -20 49 -23 140 -22 56 0 107 5 112 10 5 5 12 33 16 62 l7 52 -86 0 c-47 0 -88 3 -90 8 -3 4 -2 22 0 40 l5 32 89 0 c48 0 90 4 93 8 3 5 8 32 12 60 l7 52 -87 0 c-83 0 -86 1 -86 23 0 44 14 52 107 57 l88 5 9 48 c6 29 6 51 0 56 -13 12 -138 18 -200 10z"/>
+                <path d="M1352 781 c-15 -9 -27 -64 -67 -306 -14 -82 -28 -162 -31 -177 l-6 -28 71 0 c80 0 71 -12 96 135 10 55 21 104 25 108 4 5 16 -12 26 -37 18 -44 21 -46 61 -46 38 0 44 4 78 50 21 28 39 49 41 48 1 -2 -8 -57 -21 -123 -13 -66 -20 -124 -16 -128 5 -4 37 -7 72 -5 l63 3 8 35 c25 117 79 454 74 466 -6 16 -97 20 -124 5 -9 -5 -46 -50 -82 -100 -36 -49 -67 -90 -70 -90 -3 -1 -21 38 -40 85 -19 48 -40 93 -48 100 -15 15 -89 19 -110 5z"/>
+                <path d="M2015 780 c-11 -4 -30 -18 -41 -31 -20 -22 -194 -444 -194 -469 0 -6 30 -10 74 -10 l75 0 19 53 20 52 56 3 c53 3 56 2 56 -21 0 -14 3 -39 6 -56 l7 -31 68 0 c37 0 70 3 72 8 9 13 -13 437 -24 463 -6 15 -22 31 -35 38 -29 13 -129 14 -159 1z m65 -200 l0 -80 -30 0 c-16 0 -30 4 -30 9 0 13 51 151 56 151 2 0 4 -36 4 -80z"/>
+                <path d="M788 634 l-76 -36 -26 -138 c-14 -76 -26 -149 -26 -164 0 -26 1 -26 69 -26 58 0 71 3 75 18 9 29 67 374 63 378 -2 2 -37 -13 -79 -32z"/>
+              </g>
+              <g transform="translate(0,106) scale(0.1,-0.1)" fill="#008AD1" stroke="none">
+                <path d="M753 782 c-11 -7 -37 -122 -28 -130 2 -3 38 10 79 28 63 28 76 38 81 61 4 16 4 33 0 39 -7 11 -114 14 -132 2z"/>
+              </g>
+            </svg>
+          </div>
+          <p class="footer-brand-desc">Federação das Indústrias do Estado do Maranhão. Fortalecendo o setor industrial maranhense há mais de 60 anos.</p>
+          <div class="footer-contact">
+            <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i> São Luís — MA, Brasil</div>
+            <div class="footer-contact-item"><i class="fa-solid fa-phone"></i> (98) 3213-7000</div>
+            <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i> contato@fiema.org.br</div>
+          </div>
+          <div class="footer-social">
+            <a href="https://pt-br.facebook.com/sistemafiema/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/sistemafiema/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Institucional -->
+        <div>
+          <div class="footer-col-title">Institucional</div>
+          <ul class="footer-links">
+            <li><a href="https://www.fiema.org.br/pagina/22/institucional">Sobre a FIEMA</a></li>
+            <li><a href="https://www.fiema.org.br/pagina/27/diretoria">Diretoria</a></li>
+            <li><a href="https://www.fiema.org.br/pagina/24/estrutura-organizacional">Estrutura</a></li>
+            <li><a href="https://www.fiema.org.br/compliance">Compliance</a></li>
+            <li><a href="https://www.fiema.org.br/pagina/25/conselhos-tematicos">Conselhos Temáticos</a></li>
+            <li><a href="https://www.fiema.org.br/pagina/28/contatos">Contatos</a></li>
+          </ul>
+        </div>
+
+        <!-- Serviços -->
+        <div>
+          <div class="footer-col-title">Serviços</div>
+          <ul class="footer-links">
+            <li><a href="https://www.fiema.org.br/cursos/agenda-de-cursos">Cursos</a></li>
+            <li><a href="https://www.fiema.org.br/eventos/agenda-de-eventos">Eventos</a></li>
+            <li><a href="https://www.fiema.org.br/servico/74/acesso-ao-credito">Acesso ao Crédito</a></li>
+            <li><a href="https://www.fiema.org.br/servico/93/certificado-digital">Certificado Digital</a></li>
+            <li><a href="https://www.fiema.org.br/noticias/lista-de-noticias">Notícias</a></li>
+            <li><a href="https://www.fiema.org.br/midia/documentos/lista-de-documentos">Publicações</a></li>
+          </ul>
+        </div>
+
+        <!-- Fale Conosco -->
+        <div>
+          <div class="footer-col-title">Fale Conosco</div>
+          <ul class="footer-links">
+            <li><a href="https://www.fiema.org.br/pagina/40">SAC / Ouvidoria</a></li>
+            <li><a href="https://www.fiema.org.br/sac/index/duvidas-frequentes">Dúvidas Frequentes</a></li>
+            <li><a href="https://www.fiema.org.br/unidade/16/sao-luis-2">Unidade São Luís</a></li>
+            <li><a href="https://www.fiema.org.br/unidade/17/imperatriz-2">Unidade Imperatriz</a></li>
+            <li><a href="https://www.fiema.org.br/unidade/35/balsas-2">Unidade Balsas</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <span class="footer-copy">© 2025 FIEMA — Todos os direitos reservados.</span>
+      <div class="footer-bottom-links">
+        <a href="https://www.fiema.org.br/pagina/view/33">Acessibilidade</a>
+        <a href="https://www.fiema.org.br/site/mapa-site">Mapa do Site</a>
+        <a href="https://www.fiema.org.br/images/codigo_conduta_etica-3_edicao.pdf" target="_blank">Código de Ética</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB WhatsApp -->
+<a href="https://wa.me/559832137000" class="fab-wa" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+  <!-- Official WhatsApp icon SVG -->
+  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.484-2.002A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0z" fill="#25D366"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M23.4 20.4c-.34-.17-2.006-.99-2.316-1.1-.31-.11-.536-.17-.762.17-.225.34-.875 1.1-1.073 1.326-.198.225-.396.253-.736.085-.34-.17-1.437-.53-2.737-1.69-1.012-.902-1.695-2.016-1.894-2.356-.198-.34-.021-.524.149-.694.152-.152.34-.396.51-.595.17-.198.226-.34.34-.564.113-.226.057-.424-.028-.594-.085-.17-.762-1.836-1.044-2.514-.274-.66-.553-.57-.762-.58a13.7 13.7 0 00-.65-.012c-.226 0-.594.085-.904.424-.31.34-1.185 1.158-1.185 2.824 0 1.666 1.213 3.275 1.382 3.5.17.226 2.387 3.647 5.784 5.114.808.35 1.44.558 1.931.714.811.258 1.55.222 2.134.135.651-.097 2.006-.82 2.288-1.61.283-.79.283-1.468.198-1.61-.085-.141-.31-.226-.65-.396z" fill="#fff"/>
+  </svg>
+  <span class="fab-label">WhatsApp</span>
+</a>
+
+<script>
+  // Sticky header
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }));
+
+  // Services filter
+  const cards = document.querySelectorAll('.service-card');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const svcSearch = document.getElementById('svcSearch');
+  const svcEmpty = document.getElementById('svcEmpty');
+  const emptyTerm = document.getElementById('emptyTerm');
+  let activeTab = 'voce';
+
+  function filterServices() {
+    const q = svcSearch.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const matchTab = activeTab === 'todos' || card.dataset.group === activeTab;
+      const matchSearch = !q ||
+        card.dataset.name.includes(q) ||
+        card.querySelector('.svc-name').textContent.toLowerCase().includes(q);
+      const show = matchTab && matchSearch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    svcEmpty.classList.toggle('show', visible === 0);
+    if (visible === 0) emptyTerm.textContent = svcSearch.value;
+  }
+
+  tabBtns.forEach(btn => btn.addEventListener('click', () => {
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    activeTab = btn.dataset.tab;
+    filterServices();
+  }));
+
+  let searchTimer;
+  svcSearch.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(filterServices, 180);
+  });
+
+  // Hero CTAs pre-select tab
+  document.getElementById('heroVoce').addEventListener('click', () => {
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    const t = document.querySelector('[data-tab="voce"]');
+    t.classList.add('active'); t.setAttribute('aria-selected', 'true');
+    activeTab = 'voce'; filterServices();
+  });
+  document.getElementById('heroEmpresa').addEventListener('click', () => {
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    const t = document.querySelector('[data-tab="empresa"]');
+    t.classList.add('active'); t.setAttribute('aria-selected', 'true');
+    activeTab = 'empresa'; filterServices();
+  });
+
+  filterServices();
+
+  // Newsletter feedback
+  document.getElementById('nlForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Inscrito!';
+    btn.style.background = '#52AE32';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; e.target.reset(); }, 3000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.fiema.org.br)",
+      "WebFetch(domain:fiema.org.br)"
+    ]
+  }
+}
