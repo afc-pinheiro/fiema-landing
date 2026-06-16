@@ -710,6 +710,17 @@
       .footer-entities .container { flex-direction: column; align-items: flex-start; gap: 12px; }
       .footer-entity-label { border-right: none; padding-right: 0; margin-right: 0; }
     }
+    /* ── SCROLL REVEAL ── */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+      will-change: opacity, transform;
+    }
+    [data-animate].is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-animate] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -1335,6 +1346,42 @@
   });
 
   filterServices();
+
+  // Scroll reveal
+  (function () {
+    const selectors = [
+      '.destaques .tag', '.destaques .section-title', '.destaques .section-sub',
+      '.destaque-main', '.destaque-card',
+      '.stat',
+      '.services .tag', '.services .section-title', '.services .section-sub',
+      '.services-controls', '.services-grid',
+      '.entities .tag', '.entities .section-title', '.entities .section-sub',
+      '.entity-card',
+      '.news .tag', '.news .section-title', '.news-all', '.news-card',
+      '.units .tag', '.units .section-title', '.units .section-sub', '.unit-card',
+      '.newsletter .tag', '.newsletter .section-title', '.newsletter .section-sub', '.nl-form',
+    ];
+    selectors.forEach(sel =>
+      document.querySelectorAll(sel).forEach(el => el.setAttribute('data-animate', ''))
+    );
+
+    // Stagger items inside grid containers
+    ['.stats .container', '.destaques-grid', '.destaques-side', '.entities-grid', '.news-grid', '.units-grid'].forEach(wrap => {
+      document.querySelectorAll(wrap).forEach(container => {
+        container.querySelectorAll('[data-animate]').forEach((el, i) => {
+          el.style.transitionDelay = (i * 100) + 'ms';
+        });
+      });
+    });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-animate]').forEach(el => io.observe(el));
+  })();
 
   // Newsletter feedback
   document.getElementById('nlForm').addEventListener('submit', e => {
