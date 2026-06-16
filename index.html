@@ -670,8 +670,11 @@
     }
 
     @media (max-width: 480px) {
-      /* Mockup bar: hide secondary links, keep only the warning text */
-      .mockup-bar > a { display: none; }
+      /* Mockup bar: wrap to 2 lines, hide only "Site oficial" */
+      :root { --disclaimer-h: 58px; }
+      .mockup-bar { flex-wrap: wrap; height: auto; min-height: 58px; row-gap: 2px; }
+      .mockup-bar > a:last-of-type { display: none; }
+      .mockup-bar > span:last-of-type { display: none; }
 
       .entity-card { flex-direction: column; align-items: stretch; }
       .entity-logo-wrap { width: 100%; min-width: 0; height: 80px; padding: 12px; }

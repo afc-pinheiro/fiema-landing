@@ -1614,8 +1614,11 @@
     }
 
     @media (max-width: 480px) {
-      /* Mockup bar: hide secondary links, keep only the warning text */
-      .mockup-bar > a { display: none; }
+      /* Mockup bar: wrap to 2 lines, hide only "Site oficial" */
+      :root { --disclaimer-h: 58px; }
+      .mockup-bar { flex-wrap: wrap; height: auto; min-height: 58px; row-gap: 2px; }
+      .mockup-bar > a:last-of-type { display: none; }
+      .mockup-bar > span:last-of-type { display: none; }
 
       .hero h1 { font-size: 1.85rem; }
       .hero-ctas { flex-direction: column; gap: 10px; width: 100%; }
