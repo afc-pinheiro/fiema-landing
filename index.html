@@ -1383,6 +1383,28 @@
     document.querySelectorAll('[data-animate]').forEach(el => io.observe(el));
   })();
 
+  // Animated counters
+  (function () {
+    function runCounter(el) {
+      const raw = el.textContent.trim();
+      const suffix = raw.replace(/[\d]/g, '');
+      const target = parseInt(raw.replace(/\D/g, ''), 10);
+      const duration = 1600;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const cio = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
+  })();
+
   // Newsletter feedback
   document.getElementById('nlForm').addEventListener('submit', e => {
     e.preventDefault();
