@@ -148,10 +148,13 @@
     .header { position: fixed; top: var(--disclaimer-h); left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--ease); }
     .header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.1); }
 
-    .nav .container { display: flex; align-items: center; height: 76px; gap: 24px; }
+    .nav .container { display: flex; align-items: center; height: 116px; gap: 24px; }
     .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
-    .nav-logo svg { height: 72px; width: auto; }
-    @media (max-width: 767px) { .nav-logo svg { height: 56px; } }
+    .nav-logo svg { height: 108px; width: auto; }
+    @media (max-width: 767px) {
+      .nav .container { height: 64px; }
+      .nav-logo svg { height: 56px; }
+    }
     .nav-links { display: none; align-items: center; gap: 4px; flex: 1; }
     .nav-links a { font-size: .9rem; font-weight: 500; color: var(--text-muted); padding: 8px 12px; border-radius: var(--radius); transition: all var(--ease); }
     .nav-links a:hover { color: var(--blue); background: rgba(22,65,148,.06); }
@@ -172,7 +175,7 @@
     .mobile-menu a:hover { background: var(--gray-50); color: var(--blue); }
 
     /* ── HERO ── */
-    .hero { min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(140deg, #0d2d5e 0%, var(--blue) 45%, #1e55c4 100%); position: relative; overflow: hidden; padding-top: calc(100px + var(--disclaimer-h)); }
+    .hero { min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(140deg, #0d2d5e 0%, var(--blue) 45%, #1e55c4 100%); position: relative; overflow: hidden; padding-top: calc(152px + var(--disclaimer-h)); }
     .hero::before { content: ''; position: absolute; inset: 0; background: url('https://www.fiema.org.br/images/home.png') center/cover no-repeat; opacity: .08; }
     .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 0); background-size: 32px 32px; }
     .hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 80px; background: var(--white); clip-path: ellipse(55% 100% at 50% 100%); }
