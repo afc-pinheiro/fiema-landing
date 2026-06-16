@@ -1569,8 +1569,8 @@
       .entity-strip .container > div:last-child { display: none !important; }
       .entity-strip-links { justify-content: center; width: 100%; gap: 16px; }
       .header { top: var(--disclaimer-h); }
-      .hero { padding-top: calc(70px + var(--disclaimer-h)); min-height: auto; }
-      
+      .hero { padding-top: calc(112px + var(--disclaimer-h)); min-height: auto; }
+
       /* Services Sidebar to horizontal scrollbar */
       .services-sidebar { padding: 16px; }
       .services-categories {
@@ -1578,9 +1578,11 @@
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
         gap: 8px;
         padding-bottom: 8px;
       }
+      .services-categories::-webkit-scrollbar { display: none; }
       .category-btn {
         width: auto;
         padding: 10px 16px;
@@ -1589,7 +1591,7 @@
       .category-btn .category-count {
         margin-left: 6px;
       }
-      
+
       .svc-action-icon {
         opacity: 0.6;
       }
@@ -1602,6 +1604,9 @@
     }
 
     @media (max-width: 480px) {
+      /* Mockup bar: hide secondary links, keep only the warning text */
+      .mockup-bar > a { display: none; }
+
       .hero h1 { font-size: 1.85rem; }
       .hero-ctas { flex-direction: column; gap: 10px; width: 100%; }
       .hero-ctas .btn { width: 100%; }
