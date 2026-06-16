@@ -2628,7 +2628,7 @@
       const raw = el.textContent.trim();
       const suffix = raw.replace(/[\d]/g, '');
       const target = parseInt(raw.replace(/\D/g, ''), 10);
-      const duration = 1600;
+      const duration = 2600;
       const start = performance.now();
       function tick(now) {
         const p = Math.min((now - start) / duration, 1);
