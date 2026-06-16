@@ -1576,11 +1576,27 @@
       .services-sidebar {
         padding: 16px;
         min-width: 0;
-        overflow: hidden;
         max-width: 100%;
+        overflow: visible;
       }
       .services-grid-wrapper { min-width: 0; }
       .services-search-wrapper { max-width: 100%; }
+
+      /* Scroll fade hint */
+      .services-categories-wrap {
+        position: relative;
+      }
+      .services-categories-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: calc(100% - 8px); /* não cobre o padding-bottom */
+        background: linear-gradient(to right, transparent, var(--light-surface));
+        pointer-events: none;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
       .services-categories {
         flex-direction: row;
         overflow-x: auto;
@@ -1589,6 +1605,7 @@
         scrollbar-width: none;
         gap: 8px;
         padding-bottom: 8px;
+        padding-right: 40px; /* espaço para o fade */
         max-width: 100%;
       }
       .services-categories::-webkit-scrollbar { display: none; }
@@ -1915,16 +1932,18 @@
           <input type="search" class="services-search-input" id="sidebarSearch" placeholder="Buscar serviço..." aria-label="Buscar serviço">
         </div>
         
-        <div class="services-categories" role="tablist">
-          <button class="category-btn active" data-category="todos" role="tab" aria-selected="true">
-            <i class="fa-solid fa-grid-2"></i> Todos os Serviços <span class="category-count">16</span>
-          </button>
-          <button class="category-btn" data-category="voce" role="tab" aria-selected="false">
-            <i class="fa-solid fa-user"></i> Para Você <span class="category-count">7</span>
-          </button>
-          <button class="category-btn" data-category="empresa" role="tab" aria-selected="false">
-            <i class="fa-solid fa-building"></i> Para Empresas <span class="category-count">9</span>
-          </button>
+        <div class="services-categories-wrap">
+          <div class="services-categories" role="tablist">
+            <button class="category-btn active" data-category="todos" role="tab" aria-selected="true">
+              <i class="fa-solid fa-grid-2"></i> Todos os Serviços <span class="category-count">16</span>
+            </button>
+            <button class="category-btn" data-category="voce" role="tab" aria-selected="false">
+              <i class="fa-solid fa-user"></i> Para Você <span class="category-count">7</span>
+            </button>
+            <button class="category-btn" data-category="empresa" role="tab" aria-selected="false">
+              <i class="fa-solid fa-building"></i> Para Empresas <span class="category-count">9</span>
+            </button>
+          </div>
         </div>
       </aside>
 
