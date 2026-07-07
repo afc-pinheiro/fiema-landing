@@ -13,7 +13,7 @@
 Esta proposta visa à migração e ao desenvolvimento do **Novo Portal Institucional da FIEMA**, evoluindo a arquitetura atual baseada em sistemas legados para uma infraestrutura moderna de alta performance, focada em otimização de velocidade (Core Web Vitals), conversão de leads, acessibilidade e autonomia operacional para a equipe interna. 
 
 O projeto terá como referência estética e de navegação o **modelo visual pré-aprovado**, disponível em:  
-👉 [www.acdev.com.br/fiema](https://www.acdev.com.br/fiema)
+[www.acdev.com.br/fiema](https://www.acdev.com.br/fiema)
 
 ---
 
