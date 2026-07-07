@@ -1,7 +1,7 @@
 # Proposta Comercial — Novo Portal Institucional FIEMA
 
 **Cliente:** Federação das Indústrias do Estado do Maranhão (FIEMA)  
-**Proponente:** ACDEV Consultoria (André Felipe Carvalho Pinheiro)  
+**Proponente:** ACDEV Consultoria (CNPJ: 42.180.462/0001-88)  
 **Website:** [www.acdev.com.br](https://www.acdev.com.br/)  
 **Data de Emissão:** 06 de Julho de 2026  
 **Validade da Proposta:** 15 dias  
@@ -137,4 +137,4 @@ Representante Técnico / Legal
 
 __________________________________________________
 **ACDEV Consultoria**  
-André Felipe Carvalho Pinheiro
+CNPJ: 42.180.462/0001-88
