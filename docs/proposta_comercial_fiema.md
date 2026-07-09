@@ -1,4 +1,4 @@
-# Proposta Comercial — Novo Portal Institucional FIEMA
+# Proposta Comercial — Projeto de Modernização do Portal FIEMA
 
 **Cliente:** Federação das Indústrias do Estado do Maranhão (FIEMA)  
 **Proponente:** ACDEV Consultoria (CNPJ: 42.180.462/0001-88)  
@@ -41,6 +41,7 @@ Para o cumprimento do cronograma de desenvolvimento, a FIEMA deverá disponibili
 * **Infraestrutura**: Acesso SSH temporário ao servidor de destino configurado, ou acesso ao painel do **Coolify** (com permissão de implantação via chave SSH) para o provisionamento dos serviços.
 * **Dados para Migração**: Cópia de segurança (dump) do banco de dados antigo e arquivos de mídia legados para a realização da migração de conteúdo.
 * **Domínios e Redirecionamentos**: Acesso para configuração das chaves de rastreamento do Google Analytics 4 (GA4) e controle de DNS para publicação final.
+* **Profissional de Homologação**: A FIEMA deverá designar e formalizar um profissional (ou equipe dedicada) responsável como ponto de contato para avaliar, validar e realizar a **homologação formal das entregas ao final de cada Sprint**, garantindo o cumprimento do cronograma.
 
 ---
 
@@ -75,7 +76,7 @@ Esta seção detalha a arquitetura técnica proposta para a sustentação do por
 * **CMS (Strapi)**: Sistema de gerenciamento de conteúdo headless (desacoplado), rodando sob Node.js, com banco de dados independente e API REST/GraphQL.
 * **Backend de Migração (Java + Spring Boot)**: Microsserviço robusto desenvolvido em Java para atuar temporariamente como a ferramenta de extração, transformação e carga (ETL), garantindo a migração segura dos dados legados para a nova estrutura.
 * **Plataforma de Newsletter (Listmonk)**: Aplicação autohospedada escrita em Go, conectada ao banco de dados PostgreSQL. Utilizada para gerenciar contatos e disparar campanhas por e-mail com interface visual traduzida em português (PT-BR).
-* **PaaS (Coolify) & Docker**: Plataforma de gerenciamento de containers instalada no servidor da FIEMA que orquestra Next.js, Strapi, Java, Listmonk e bancos de dados em containers Docker isolados e seguros.
+* **PaaS (Coolify) & Docker**: Plataforma de gerenciamento de containers instalada no servidor da FIEMA que orquestra Next.js, Strapi, Java, Listmonk e bancos de dados in-box em containers Docker isolados e seguros.
 * **Telemetria & Observabilidade (Grafana)**: Dashboards para visualização de logs, latência de requisições, métricas de consumo de CPU/Memória e integridade das aplicações.
 * **Google Analytics (GA4)**: Integração do frontend com ferramentas de análise de comportamento do usuário.
 
@@ -89,7 +90,7 @@ O cronograma de desenvolvimento é baseado na metodologia ágil Scrum, composto 
 |---|---|---|---|
 | **Fase 1: Setup & DevOps** | Mês 1 | Sprints 1 a 2 | Instalação do Coolify no servidor FIEMA, setup dos bancos de dados, do Strapi CMS e **instalação inicial da infraestrutura do Listmonk**. Estruturação base do Next.js. |
 | **Fase 2: Frontend & Templates** | Mês 2 | Sprints 3 a 4 | Codificação Next.js das páginas públicas baseadas no modelo homologado, **incluindo o design visual e comportamento dos formulários de newsletter no frontend**. |
-| **Fase 3: Backend de Migração** | Mês 3 | Sprints 5 a 6 | Desenvolvimento do microsserviço Java (Spring Boot) para extração de dados e mapeamento das tabelas do site legado. |
+| **Fase 3: Backend de Migração** | Mês 3 | Sprints 5 a 6 | Desenvolvimento da aplicação Java (Spring Boot) para extração de dados e mapeamento das tabelas do site legado. |
 | **Fase 4: Importação & Integração** | Mês 4 | Sprints 7 a 8 | Execução da migração de dados antigos para o Strapi. **Integração completa dos formulários de newsletter do Next.js com a API do Listmonk para cadastro automático de leads**. |
 | **Fase 5: Métricas & Analytics** | Mês 5 | Sprint 9 | Conexão do Google Analytics (GA4), setup de dashboards no Grafana e **testes de disparo de campanhas, layouts de e-mail e fluxos de descadastro no Listmonk**. |
 | **Fase 5.5: Ajustes do Cliente** | Mês 5 | Sprint 10 | **Sprint de Ajustes do Cliente**: Ciclo de 15 dias dedicado inteiramente a melhorias visuais, refinamento de fluxos, ajustes estéticos e alterações pontuais sugeridas pela FIEMA após as primeiras homologações do portal. |
@@ -114,14 +115,21 @@ Os pagamentos serão efetuados via transferência bancária ou PIX, divididos no
 
 ## 9. Manutenção e Suporte Pós-Entrega
 
-Após o encerramento do desenvolvimento e a publicação definitiva do portal, inicia-se o período de manutenção:
+Após o encerramento do desenvolvimento e a publicação definitiva do portal, inicia-se o contrato de suporte e sustentação técnica:
 
 * **Valor Mensal de Manutenção:** **R$ 250,00 / mês**.
-* **Escopo do Suporte Mensal:**
-  - Monitoramento preventivo de saúde da aplicação no Grafana.
-  - Verificação de rotinas de backup do banco de dados (Strapi, Listmonk e logs de integração).
-  - Aplicação de patches de segurança críticos e atualizações de dependências das ferramentas (Next.js, Strapi, Spring Boot e Coolify).
-  - Restabelecimento do serviço em caso de travamentos de software locais.
+* **Vigência e Renovação**: O contrato de suporte tem prazo de **1 (um) ano**, com renovação automática por períodos iguais e sucessivos de 12 meses.
+* **Índice de Reajuste Anual**: O valor mensal do suporte será reajustado anualmente no mês de aniversário da assinatura com base na variação acumulada do **IPCA/IBGE** (Índice Nacional de Preços ao Consumidor Amplo) acumulado do período.
+* **Escopo do Suporte Mensal (Incluso)**:
+  - **Correção de Bugs**: Resolução de erros ou comportamentos inesperados de software que não tenham sido detectados durante a fase de desenvolvimento e homologação.
+  - **Resolução de Dúvidas**: Apoio operacional e esclarecimento de dúvidas da equipe da FIEMA referentes ao uso cotidiano do Strapi CMS e da ferramenta Listmonk.
+  - **Monitoramento e Estabilidade**: Acompanhamento preventivo da saúde do portal nos dashboards do Grafana e restabelecimento das aplicações em caso de quedas ou travamentos.
+  - **Patches e Atualizações**: Aplicação de atualizações de segurança críticas e patches de dependências nas plataformas.
+* **Limite Mensal de Esforço**: O suporte compreende um limite de até **8 (oito) horas mensais** de atendimento técnico.
+* **Novas Funcionalidades (Excluído do Suporte)**:
+  - O desenvolvimento de novas páginas, alterações profundas de layout pós-homologação ou novas funcionalidades não fazem parte do escopo de manutenção preventiva.
+  - Demandas de novas implementações serão tratadas de forma avulsa, cobradas à taxa horária de **R$ 250,00 / hora**, sob orçamento prévio aprovado.
+* **Canal de Atendimento e SLA**: Os chamados deverão ser abertos via e-mail oficial da consultoria, com tempo de resposta (SLA) de até **24 horas úteis** para solicitações comuns e até **4 horas úteis** para incidentes críticos (site fora do ar).
 
 ---
 

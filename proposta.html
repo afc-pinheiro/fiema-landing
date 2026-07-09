@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Proposta Comercial acdev.</title>
+    <style>
+        /* Importação das fontes da identidade do site */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+        
+        @page {
+            size: A4;
+            margin: 12mm 15mm;
+            background-color: #ffffff;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        /* A classe global para o seu logo exato */
+        .brand-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+        }
+        .purple-dot {
+            color: #9b51e0;
+        }
+        
+        /* ================= PÁGINA 1: CAPA (TABELA) ================= */
+        .cover-page {
+            height: 270mm;
+            position: relative;
+            page-break-after: always;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25mm 15mm;
+        }
+
+        .cover-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #111827;
+            font-size: 46pt;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -1.5px;
+            line-height: 1;
+        }
+        
+        .cover-logo-container {
+            font-size: 26pt;
+            margin-top: 5px;
+            color: #111827;
+        }
+
+        .cover-bottom {
+            position: absolute;
+            bottom: 25mm;
+            left: 15mm;
+            right: 15mm;
+        }
+        
+        .service-box {
+            border: 2px solid #9b51e0;
+            border-radius: 6px;
+            display: inline-block;
+            padding: 10px 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 15pt;
+            color: #111827;
+            margin-bottom: 5px;
+            background-color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Tabela Estilo Clássico (Linhas Cinzas) */
+        .cover-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-table td {
+            border: 2px solid #ffffff;
+            padding: 10px 12px;
+            vertical-align: middle;
+        }
+        
+        .bg-dark { background-color: #a6a6a6; color: #000; }
+        .bg-light { background-color: #e6e6e6; color: #000; }
+        
+        .td-label { font-weight: 700; width: 15%; }
+        .td-val { width: 35%; }
+
+
+        /* ================= PÁGINA 2: QUEM SOMOS (INFOGRÁFICO) ================= */
+        .quem-somos-page {
+            margin-top: 5mm;
+            page-break-after: always;
+        }
+        
+        .section-header {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #111827;
+            font-size: 28pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            gap: 25px;
+        }
+        
+        .about-left {
+            flex: 0 0 45%;
+        }
+        
+        .about-right {
+            flex: 1;
+        }
+        
+        .photo-box {
+            background-color: #111827;
+            height: 220px;
+            width: 100%;
+            clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 6px solid #9b51e0;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 10px, transparent 10px, transparent 20px);
+        }
+        
+        .photo-box-text {
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 32pt;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-align: center;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+        
+        .photo-box-logo {
+            font-size: 34pt;
+            text-transform: lowercase;
+        }
+
+        .about-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #111827;
+            font-size: 26pt;
+            font-weight: 800;
+            margin-top: -8px;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .about-text {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .stats-row {
+            display: flex;
+            width: 100%;
+            margin-top: 40px;
+        }
+        
+        .stat-box {
+            flex: 1;
+            padding: 30px 10px;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .sb-purple { background-color: #9b51e0; }
+        .sb-dark { background-color: #111827; }
+        .sb-violet { background-color: #6b21a8; }
+        .sb-gray { background-color: #374151; }
+        
+        .sb-val { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26pt; font-weight: 900; margin-bottom: 8px; line-height: 1; }
+        .sb-desc { font-size: 9pt; text-transform: uppercase; font-weight: 700; line-height: 1.3; }
+        
+        .trajectory-section {
+            margin-top: 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .trajectory-section::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 70px;
+            background-color: #111827;
+            top: 10px;
+            left: 20%;
+            transform: rotate(20deg);
+        }
+
+        .trajectory-section::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 70px;
+            background-color: #111827;
+            bottom: 10px;
+            right: 25%;
+            transform: rotate(20deg);
+        }
+
+        .traj-small { font-size: 13pt; color: #4b5563; font-weight: 600; margin-bottom: 2px; }
+        .traj-large { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40pt; color: #111827; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 2px; }
+        
+        .traj-pin {
+            margin-top: 30px;
+            border: 5px solid #9b51e0;
+            border-radius: 50% 50% 50% 0;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transform: rotate(-45deg);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .traj-pin-text {
+            font-size: 26pt;
+            color: #111827;
+            transform: rotate(45deg);
+        }
+
+        /* ================= PÁGINAS MIOLO (PROPOSTA COMERCIAL) ================= */
+        .proposal-page {
+            margin-top: 5mm;
+            page-break-after: always;
+        }
+
+        .proposal-page:last-child {
+            page-break-after: auto;
+        }
+
+        .header-simple {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .header-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14pt;
+            font-weight: 800;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .header-logo {
+            font-size: 14pt;
+            color: #111827;
+        }
+
+        .doc-section {
+            margin-bottom: 22px;
+        }
+
+        .doc-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14pt;
+            font-weight: 800;
+            color: #111827;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .doc-title span.num {
+            color: #9b51e0;
+            margin-right: 8px;
+        }
+
+        .doc-text {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .doc-text strong {
+            color: #111827;
+            font-weight: 700;
+        }
+
+        .doc-text a {
+            color: #9b51e0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .doc-list {
+            margin: 0 0 15px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .doc-list li {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .doc-list li::before {
+            content: '■';
+            color: #9b51e0;
+            font-size: 8pt;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        
+        .doc-sublist {
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .doc-sublist li::before {
+            content: '-';
+            color: #6b7280;
+            font-size: 11pt;
+            font-weight: bold;
+            top: -1px;
+        }
+
+        /* Tabela de Cronograma */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 9.5pt;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .modern-table th {
+            background-color: #111827;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            text-align: left;
+            padding: 10px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 8.5pt;
+        }
+
+        .modern-table td {
+            background-color: #ffffff;
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        
+        .modern-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .modern-table td strong {
+            color: #111827;
+        }
+
+        /* Bloco de Investimento */
+        .investment-card {
+            background-color: #111827;
+            color: #ffffff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border-left: 6px solid #9b51e0;
+            margin: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inv-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11pt;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .inv-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 24pt;
+            font-weight: 900;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        /* Área de Assinaturas */
+        .signature-area {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .signature-block {
+            flex: 1;
+            border-top: 1px solid #111827;
+            padding-top: 12px;
+        }
+
+        .sig-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10pt;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+
+        .sig-role {
+            font-size: 9pt;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cover-page">
+        <h1 class="cover-title">Proposta Comercial</h1>
+        <div class="cover-logo-container brand-logo">acdev<span class="purple-dot">.</span></div>
+        
+        <div class="cover-bottom">
+            <div class="service-box">
+                Desenvolvimento de Novo Portal Institucional
+            </div>
+            
+            <table class="cover-table">
+                <tr class="bg-dark">
+                    <td class="td-label">CLIENTE:</td>
+                    <td colspan="3">Federação das Indústrias do Estado do Maranhão - FIEMA</td>
+                </tr>
+                <tr class="bg-light">
+                    <td class="td-label">Código:</td>
+                    <td class="td-val">ACD0014P26</td>
+                    <td class="td-label">Unidade:</td>
+                    <td class="td-val">Sistema FIEMA</td>
+                </tr>
+                <tr class="bg-dark">
+                    <td class="td-label">Projeto:</td>
+                    <td>Desenvolvimento e Evolução Sistêmica</td>
+                    <td class="td-label">Projeto:</td>
+                    <td></td>
+                </tr>
+                <tr class="bg-light">
+                    <td class="td-label">Data:</td>
+                    <td>08/07/2026</td>
+                    <td class="td-label">Proposta:</td>
+                    <td>001-2026</td>
+                </tr>
+                <tr class="bg-dark">
+                    <td class="td-label">Executivo:</td>
+                    <td>ANDRÉ F. CARVALHO PINHEIRO</td>
+                    <td class="td-label">Oportunidade:</td>
+                    <td>Desenvolvimento Web</td>
+                </tr>
+                <tr class="bg-light">
+                    <td class="td-label">Especialidade:</td>
+                    <td colspan="3">Frontend (Next.js), CMS (Strapi), Backend de Migração (Java + Spring Boot), Plataforma de Newsletter (Listmonk), PaaS (Coolify) & Docker, Telemetria & Observabilidade (Grafana), Google Analytics (GA4)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="quem-somos-page">
+        <div class="section-header">Quem Somos</div>
+        
+        <div class="about-container">
+            <div class="about-left">
+                <div class="photo-box">
+                    <div class="photo-box-text">
+                        #SOMOS<br>
+                        <span class="photo-box-logo brand-logo">acdev<span class="purple-dot">.</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-right">
+                <div class="about-title">Quem Somos</div>
+                <div class="about-text">
+                    A <strong class="brand-logo">acdev<span class="purple-dot">.</span></strong> é uma empresa de tecnologia especializada no desenvolvimento de sistemas customizados e de alta performance, arquiteturas escaláveis e estruturação de soluções digitais sob medida para o ambiente corporativo.
+                </div>
+                <div class="about-text">
+                    As nossas soluções conectam uma excelente experiência de interface à robustez e segurança operacional de que o seu back-end necessita. Com ampla experiência na modernização de sistemas legados, integrações complexas e automação de processos, atuamos para garantir que a sua operação rode com máxima velocidade, estabilidade e inteligência de dados.
+                </div>
+                <div class="about-text">
+                    Para oferecer um serviço de elevado valor, focamo-nos estritamente nos objetivos estratégicos de cada cliente. A nossa missão é entregar plataformas e sistemas robustos, garantindo total autonomia tecnológica para que a sua equipe foque exclusivamente no core business e no crescimento da instituição.
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat-box sb-purple">
+                <div class="sb-val">+10 Anos</div>
+                <div class="sb-desc">De Experiência<br>Comprovada</div>
+            </div>
+            <div class="stat-box sb-dark">
+                <div class="sb-val">100%</div>
+                <div class="sb-desc">Foco em Performance<br>Sistêmica</div>
+            </div>
+            <div class="stat-box sb-violet">
+                <div class="sb-val">ÚNICA</div>
+                <div class="sb-desc">Engenharia Ágil<br>Adaptada ao Cliente</div>
+            </div>
+            <div class="stat-box sb-gray">
+                <div class="sb-val">+100</div>
+                <div class="sb-desc">Projetos Entregues</div>
+            </div>
+        </div>
+        
+        <div class="trajectory-section">
+            <div class="traj-small">Foi toda essa</div>
+            <div class="traj-large">TRAJETÓRIA</div>
+            <div class="traj-small">que trouxe a <span class="brand-logo" style="font-size: 14pt;">acdev<span class="purple-dot">.</span></span> até aqui</div>
+            
+            <div class="traj-pin">
+                <span class="traj-pin-text brand-logo">acdev<span class="purple-dot">.</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="proposal-page">
+        <div class="header-simple">
+            <div class="header-title">Proposta Comercial &bull; Escopo</div>
+            <div class="header-logo brand-logo">acdev<span class="purple-dot">.</span></div>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">1.</span> Objetivo do Projeto</h3>
+            <p class="doc-text">
+                Esta proposta visa à migração e ao desenvolvimento do <strong>Novo Portal Institucional da FIEMA</strong>, evoluindo a arquitetura atual baseada em sistemas legados para uma infraestrutura moderna de alta performance, focada em otimização de velocidade (Core Web Vitals), conversão de leads, acessibilidade e autonomia operacional para a equipe interna.
+            </p>
+            <p class="doc-text">
+                O projeto terá como referência estética e de navegação o <strong>modelo visual pré-aprovado</strong>, disponível em:<br>
+                <a href="https://www.acdev.com.br/fiema" target="_blank">www.acdev.com.br/fiema</a>
+            </p>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">2.</span> Escopo de Serviços e Migração de Conteúdo</h3>
+            <p class="doc-text">O desenvolvimento engloba as seguintes atividades, explicadas de forma executiva e funcional:</p>
+            
+            <ul class="doc-list">
+                <li><strong>Desenvolvimento do Portal Público:</strong> Criação de todas as páginas públicas (Home, Sobre, Serviços, Notícias, Editais, Unidades e Contato) com foco em velocidade de carregamento, navegação mobile intuitiva e indexação no Google.</li>
+                <li><strong>Painel de Controle e Autonomia (CMS):</strong> Configuração de um painel administrativo protegido (Strapi) para que a equipe de comunicação e marketing da FIEMA gerencie, edite e publique conteúdos sem necessidade de suporte técnico.</li>
+                <li><strong>Central de Newsletter Open Source:</strong> Implantação de um sistema próprio de envio de e-mails corporativos (Listmonk) integrado ao site público para capturar novos inscritos e disparar boletins informativos.</li>
+                <li><strong>Migração do Conteúdo Legado:</strong>
+                    <ul class="doc-sublist">
+                        <li>Mapeamento e extração de dados do site Yii legado.</li>
+                        <li>Importação automatizada de: <strong>notícias antigas, arquivos e editais, galerias de fotos</strong> e históricos institucionais para o novo sistema.</li>
+                        <li>Otimização de imagens antigas para formatos modernos e leves de internet.</li>
+                    </ul>
+                </li>
+                <li><strong>Treinamento e Capacitação:</strong>
+                    <ul class="doc-sublist">
+                        <li>Sessão de treinamento prático de <strong>4 horas</strong> para a equipe de TI e comunicação da FIEMA sobre a gestão do Strapi CMS e operação do sistema de e-mails Listmonk (inclui gravação em vídeo para consultas futuras).</li>
+                        <li>Fornecimento de um Guia de Operação Rápida.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">3.</span> Pré-requisitos de Início (Responsabilidades da FIEMA)</h3>
+            <p class="doc-text">Para o cumprimento do cronograma de desenvolvimento, a FIEMA deverá disponibilizar na primeira semana de projeto:</p>
+            <ul class="doc-list">
+                <li><strong>Infraestrutura:</strong> Acesso SSH temporário ao servidor de destino configurado, ou acesso ao painel do <strong>Coolify</strong> (com permissão de implantação via chave SSH) para o provisionamento dos serviços.</li>
+                <li><strong>Dados para Migração:</strong> Cópia de segurança (dump) do banco de dados antigo e arquivos de mídia legados para a realização da migração de conteúdo.</li>
+                <li><strong>Domínios e Redirecionamentos:</strong> Acesso para configuração das chaves de rastreamento do Google Analytics 4 (GA4) e controle de DNS para publicação final.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="proposal-page">
+        <div class="header-simple">
+            <div class="header-title">Proposta Comercial &bull; Arquitetura e Garantia</div>
+            <div class="header-logo brand-logo">acdev<span class="purple-dot">.</span></div>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">4.</span> Limitação de Responsabilidade (Datacenter Próprio)</h3>
+            <p class="doc-text">Dado que a aplicação será executada em infraestrutura própria de servidores sob a responsabilidade e controle da FIEMA:</p>
+            <ul class="doc-list">
+                <li>A <strong class="brand-logo">acdev<span class="purple-dot">.</span></strong> compromete-se com a entrega do código em conformidade técnica, configuração correta das aplicações no Coolify e estabilidade do software em ambiente normal de uso.</li>
+                <li>A <strong class="brand-logo">acdev<span class="purple-dot">.</span></strong> <strong>não se responsabiliza</strong> por prejuízos ou indisponibilidade decorrentes de:
+                    <ul class="doc-sublist">
+                        <li>Quedas de fornecimento de energia elétrica ou problemas de infraestrutura local do datacenter da FIEMA.</li>
+                        <li>Interrupções ou oscilações na operadora de conectividade/link de internet da instituição.</li>
+                        <li>Falhas físicas de hardware (discos rígidos, memória, etc.) dos servidores da entidade.</li>
+                        <li>Modificações de configuração do sistema operacional do servidor feitas por técnicos internos da FIEMA.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">5.</span> Garantia, LGPD e Propriedade Intelectual</h3>
+            <p class="doc-text">Visando à conformidade jurídica e segurança institucional da FIEMA, estabelecem-se as seguintes diretrizes:</p>
+            <ul class="doc-list">
+                <li><strong>Período de Garantia:</strong> A <span class="brand-logo">acdev<span class="purple-dot">.</span></span> fornece uma garantia técnica de <strong>90 dias</strong> (em conformidade com o Art. 26 do Código de Defesa do Consumidor) a contar da entrega final do projeto. Durante este período, qualquer erro ou comportamento inesperado do software (bugs) será corrigido sem custo adicional.</li>
+                <li><strong>Propriedade e Licenciamento:</strong> Após a quitação integral do projeto, a FIEMA receberá uma <strong>licença de uso perpétua, não exclusiva, transferível para suas unidades e livre de royalties</strong> sobre todo o código-fonte desenvolvido para o portal (Next.js, Strapi CMS e rotinas de migração em Java). A FIEMA terá total liberdade para hospedar, manter, modificar e atualizar o código internamente. A <span class="brand-logo">acdev<span class="purple-dot">.</span></span> retém a propriedade intelectual sobre suas bibliotecas base, arquiteturas de código (boilerplates) e métodos genéricos desenvolvidos, sendo livre para reutilizá-los em outros projetos. Fica expressamente proibido à FIEMA revender, sublicenciar ou comercializar o código-fonte desenvolvido para terceiros externos.</li>
+                <li><strong>Conformidade com a LGPD:</strong> Os formulários de contato e assinatura de newsletter serão desenvolvidos seguindo as regras da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), incluindo caixas de seleção de consentimento explícito e links diretos para descadastro automatizado (opt-out) nas newsletters enviadas.</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">6.</span> Detalhamento Técnico da Solução (Para Equipe de TI)</h3>
+            <p class="doc-text">Esta seção detalha a arquitetura técnica proposta para a sustentação do portal:</p>
+            <ul class="doc-list">
+                <li><strong>Frontend (Next.js):</strong> Utilização do Next.js para renderização rápida, otimização de imagens em tempo real e estrutura compatível com acessibilidade digital (WCAG).</li>
+                <li><strong>CMS (Strapi):</strong> Sistema de gerenciamento de conteúdo headless (desacoplado), rodando sob Node.js, com banco de dados independente e API REST/GraphQL.</li>
+                <li><strong>Backend de Migração (Java + Spring Boot):</strong> Microsserviço robusto desenvolvido em Java para atuar temporariamente como a ferramenta de extração, transformação e carga (ETL), garantindo a migração segura dos dados legados para a nova estrutura.</li>
+                <li><strong>Plataforma de Newsletter (Listmonk):</strong> Aplicação autohospedada escrita em Go, conectada ao banco de dados PostgreSQL. Utilizada para gerenciar contatos e disparar campanhas por e-mail com interface visual traduzida em português (PT-BR).</li>
+                <li><strong>PaaS (Coolify) & Docker:</strong> Plataforma de gerenciamento de containers instalada no servidor da FIEMA que orquestra Next.js, Strapi, Java, Listmonk e bancos de dados em containers Docker isolados e seguros.</li>
+                <li><strong>Telemetria & Observabilidade (Grafana):</strong> Dashboards para visualização de logs, latência de requisições, métricas de consumo de CPU/Memória e integridade das aplicações.</li>
+                <li><strong>Google Analytics (GA4):</strong> Integração do frontend com ferramentas de análise de comportamento do usuário.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="proposal-page">
+        <div class="header-simple">
+            <div class="header-title">Proposta Comercial &bull; Cronograma</div>
+            <div class="header-logo brand-logo">acdev<span class="purple-dot">.</span></div>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">7.</span> Cronograma e Prazos (6 Meses)</h3>
+            <p class="doc-text">O cronograma de desenvolvimento é baseado na metodologia ágil Scrum, composto por <strong>12 Sprints de 15 dias</strong> (2 semanas cada):</p>
+            
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th width="18%">Fase</th>
+                        <th width="10%">Período</th>
+                        <th width="14%">Sprints</th>
+                        <th width="58%">Detalhamento das Entregas e Marcos de Newsletter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fase 1:</strong> Setup & DevOps</td>
+                        <td>Mês 1</td>
+                        <td>Sprints 1 a 2</td>
+                        <td>Instalação do Coolify no servidor FIEMA, setup dos bancos de dados, do Strapi CMS e <strong>instalação inicial da infraestrutura do Listmonk</strong>. Estruturação base do Next.js.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 2:</strong> Frontend & Templates</td>
+                        <td>Mês 2</td>
+                        <td>Sprints 3 a 4</td>
+                        <td>Codificação Next.js das páginas públicas baseadas no modelo homologado, <strong>incluindo o design visual e comportamento dos formulários de newsletter no frontend</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 3:</strong> Backend de Migração</td>
+                        <td>Mês 3</td>
+                        <td>Sprints 5 a 6</td>
+                        <td>Desenvolvimento do microsserviço Java (Spring Boot) para extração de dados e mapeamento das tabelas do site legado.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 4:</strong> Importação & Integração</td>
+                        <td>Mês 4</td>
+                        <td>Sprints 7 a 8</td>
+                        <td>Execução da migração de dados antigos para o Strapi. <strong>Integração completa dos formulários de newsletter do Next.js com a API do Listmonk para cadastro automático de leads</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 5:</strong> Métricas & Analytics</td>
+                        <td>Mês 5</td>
+                        <td>Sprint 9</td>
+                        <td>Conexão do Google Analytics (GA4), setup de dashboards no Grafana e <strong>testes de disparo de campanhas, layouts de e-mail e fluxos de descadastro no Listmonk</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 5.5:</strong> Ajustes do Cliente</td>
+                        <td>Mês 5</td>
+                        <td>Sprint 10</td>
+                        <td><strong>Sprint de Ajustes do Cliente:</strong> Ciclo de 15 dias dedicado inteiramente a melhorias visuais, refinamento de fluxos, ajustes estéticos e alterações pontuais sugeridas pela FIEMA após as primeiras homologações do portal.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 6:</strong> Homologação & Treinamento</td>
+                        <td>Mês 6</td>
+                        <td>Sprints 11 a 12</td>
+                        <td>Testes de aceitação (UAT), <strong>treinamento prático de operação do Strapi CMS e da ferramenta de envio de newsletter Listmonk</strong>, homologação e publicação final.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="proposal-page">
+        <div class="header-simple">
+            <div class="header-title">Proposta Comercial &bull; Investimento e Aceite</div>
+            <div class="header-logo brand-logo">acdev<span class="purple-dot">.</span></div>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">8.</span> Investimento e Condições Financeiras</h3>
+            <p class="doc-text">Para o desenvolvimento integral do escopo proposto e a entrega das aplicações funcionando em produção, estabelece-se o valor de:</p>
+            
+            <div class="investment-card">
+                <div>
+                    <div class="inv-label">Investimento Total do Projeto</div>
+                </div>
+                <div class="inv-value">R$ 80.000,00</div>
+            </div>
+
+            <p class="doc-text"><strong>Cronograma de Faturamento (3 Parcelas):</strong><br>
+            Os pagamentos serão efetuados via transferência bancária ou PIX, divididos nos seguintes marcos de entrega física:</p>
+            
+            <ul class="doc-list">
+                <li><strong>Parcela 1 — 30% (R$ 24.000,00):</strong> Faturada e devida ao <strong>final da Sprint 2</strong> (Mês 1), após o setup inicial da infraestrutura de servidores (Coolify instalado e rodando com Strapi e Listmonk ativos) e validação da estrutura Next.js.</li>
+                <li><strong>Parcela 2 — 30% (R$ 24.000,00):</strong> Faturada e devida ao <strong>final da Sprint 4</strong> (Mês 2), após a conclusão e homologação das telas e templates do Frontend (Next.js) em ambiente de homologação.</li>
+                <li><strong>Parcela 3 (Entrega Final) — 40% (R$ 32.000,00):</strong> Faturada e devida na <strong>homologação e entrega final do projeto</strong> (final da Sprint 12), com o portal publicado no domínio definitivo, migração concluída, equipe treinada e observabilidade operacional ativa.</li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">9.</span> Manutenção e Suporte Pós-Entrega</h3>
+            <p class="doc-text">Após o encerramento do desenvolvimento e a publicação definitiva do portal, inicia-se o período de manutenção:</p>
+            <ul class="doc-list">
+                <li><strong>Valor Mensal de Manutenção:</strong> R$ 2.500,00 (dois mil e quinhentos reais) / mês.</li>
+                <li><strong>Escopo do Suporte Mensal:</strong>
+                    <ul class="doc-sublist">
+                        <li>Monitoramento preventivo de saúde da aplicação no Grafana.</li>
+                        <li>Verificação de rotinas de backup do banco de dados (Strapi, Listmonk e logs de integração).</li>
+                        <li>Aplicação de patches de segurança críticos e atualizações de dependências das ferramentas (Next.js, Strapi, Spring Boot e Coolify).</li>
+                        <li>Restabelecimento do serviço em caso de travamentos de software locais.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="doc-section">
+            <h3 class="doc-title"><span class="num">10.</span> Aceite da Proposta</h3>
+            <p class="doc-text">Para formalizar o início dos trabalhos sob as condições técnicas e comerciais estipuladas nesta proposta comercial, assinale a data e firme as assinaturas digitais:</p>
+            
+            <p class="doc-text" style="margin-top: 25px;">São Luís - MA, ______ de ________________ de 2026.</p>
+
+            <div class="signature-area">
+                <div class="signature-block">
+                    <div class="sig-name">Federação das Indústrias do Estado do Maranhão (FIEMA)</div>
+                    <div class="sig-role">Representante Técnico / Legal</div>
+                </div>
+                
+                <div class="signature-block">
+                    <div class="sig-name">André Felipe Carvalho Pinheiro</div>
+                    <div class="sig-role"><span class="brand-logo">acdev<span class="purple-dot">.</span></span> Consultoria (CNPJ: 42.180.462/0001-88)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
